@@ -1,0 +1,72 @@
+pip install scrapy
+
+scrapy startproject tutorial
+
+cd
+
+scrapy genspider mydomain mydomain.com
+
+scrapy list #for checking
+
+scrapy shell
+
+[[[[
+fetch("url goes here")
+
+response.css('css of html tag goes here')
+
+
+ product=response.css('product-item')      
+>>> 
+>>> products=response.css('product-item') 
+>>> 
+>>> product=products[0] 
+>>> product.css('a.product-item-meta__title::text').get()
+'2.5kg Bulk 41% Milk Hot Chocolate Drops'
+
+>>> product.css('span.price').get()
+'<span class="price">\n              <span class="visually-hidden">Sale price</span>£50.00</span>'
+>>> product.css('span.price').get().replace('<span class="price">\n              <span class="visually-hidden">Sale price</span>',' ')
+' £50.00</span>'
+>>> product.css('span.price').get().replace('<span class="price">\n              <span class="visually-hidden">Sale price</span>',' ').replace('</span>','')
+' £50.00'
+>>>
+
+>>> producr.css('div.product-item-meta a').get()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'producr' is not defined. Did you mean: 'product'?
+>>> product.css('div.product-item-meta a').get() 
+'<a href="/products/2-5kg-bulk-of-our-41-milk-hot-chocolate-drops" class="product-item-meta__title">2.5kg Bulk 41% Milk Hot Chocolate Drops</a>'
+>>> product.css('div.product-item-meta a').attrib['href']
+'/products/2-5kg-bulk-of-our-41-milk-hot-chocolate-drops'
+>>>
+
+
+
+ exit()
+
+
+]]]] shell ending
+
+scrapy crawl chocolatespider
+
+
+scrapy crawl chocolatespider -O mydata.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
